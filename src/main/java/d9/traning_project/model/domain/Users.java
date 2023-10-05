@@ -2,12 +2,12 @@ package d9.traning_project.model.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,11 +23,11 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private Long id;
-    private String full_name;
+    private String fullName;
     private String email;
     @JsonIgnore
     private String password;
-    private int phone;
+    private String phone;
     private boolean status;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -45,5 +45,7 @@ public class Users {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "users")
     @JsonIgnore
     private List<Order> orders;
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
 
 }
